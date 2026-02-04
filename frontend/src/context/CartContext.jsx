@@ -4,9 +4,13 @@ import { toast } from "react-toastify";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+  const cartKey = userInfo ? `cartItems_${userInfo._id}` : "cartItems_guest";
+
   const [cartItems, setCartItems] = useState(
-    localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
+    localStorage.getItem(cartKey)
+      ? JSON.parse(localStorage.getItem(cartKey))
       : []
   );
 
@@ -23,8 +27,8 @@ export const CartProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+    localStorage.setItem(cartKey, JSON.stringify(cartItems));
+  }, [cartItems, cartKey]);
 
   const savePaymentMethod = (data) => {
     setPaymentMethod(data);
@@ -59,7 +63,11 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem(cartKey);
+  };
+
+  const resetCartContext = () => {
+    setCartItems([]);
   };
 
   return (
@@ -72,7 +80,8 @@ export const CartProvider = ({ children }) => {
         shippingAddress,
         saveShippingAddress,
         paymentMethod,
-        savePaymentMethod
+        savePaymentMethod,
+        resetCartContext
       }}
     >
       {children}

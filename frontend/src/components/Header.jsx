@@ -15,7 +15,7 @@ import SearchBox from "./SearchBox";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { cartItems } = useCart();
+  const { cartItems, resetCartContext } = useCart();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const userInfo = localStorage.getItem("userInfo")
@@ -24,6 +24,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
+    if (resetCartContext) resetCartContext();
     navigate("/login");
     window.location.reload();
   };
