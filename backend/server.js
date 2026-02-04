@@ -23,7 +23,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: [
+      "https://free-lance-work-vl26.vercel.app",
+      "http://localhost:5173"
+    ],
     credentials: true
   })
 );
