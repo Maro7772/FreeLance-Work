@@ -15,14 +15,13 @@ import Lottie from "lottie-react";
 import emptyAnim from "../assets/Cardboard Box Open _ Loading 9.json";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { toast } from "react-toastify"; // نسينا دي في الكود اللي فات
+import { toast } from "react-toastify";
 
 const MyOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // دالة لجلب الطلبات (خرجناها برة useEffect عشان نستخدمها بعد الحذف)
   const fetchMyOrders = async () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (!userInfo) {
@@ -34,7 +33,6 @@ const MyOrdersPage = () => {
       const { data } = await axios.get("/api/orders/my-orders", {
         headers: { Authorization: `Bearer ${userInfo.token}` }
       });
-      // الترتيب: الأحدث أولاً
       const sortedOrders = data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -51,7 +49,6 @@ const MyOrdersPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
-  // 👇 دالة حذف الطلب
   const deleteHandler = async (id) => {
     if (
       window.confirm(
@@ -64,7 +61,7 @@ const MyOrdersPage = () => {
           headers: { Authorization: `Bearer ${userInfo.token}` }
         });
         toast.success("تم إلغاء الطلب بنجاح 🗑️");
-        // تحديث القائمة بعد الحذف
+
         fetchMyOrders();
       } catch (error) {
         toast.error(error.response?.data?.message || "حدث خطأ أثناء الإلغاء");
@@ -111,7 +108,6 @@ const MyOrdersPage = () => {
         </div>
       ) : (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          {/* ================= جدول الديسك توب ================= */}
           <table className="min-w-full hidden md:table">
             <thead className="bg-gray-50/50 border-b border-gray-100">
               <tr>
@@ -185,7 +181,6 @@ const MyOrdersPage = () => {
                         <FaEye />
                       </Link>
 
-                      {/* زر الحذف يظهر فقط إذا لم يتم التوصيل */}
                       {!order.isDelivered && (
                         <button
                           onClick={() => deleteHandler(order._id)}
@@ -202,7 +197,6 @@ const MyOrdersPage = () => {
             </tbody>
           </table>
 
-          {/* ================= كروت الموبايل ================= */}
           <div className="md:hidden flex flex-col gap-4 p-4">
             {orders.map((order) => (
               <div
@@ -250,7 +244,6 @@ const MyOrdersPage = () => {
                   </span>
 
                   <div className="flex gap-2">
-                    {/* زر الحذف في الموبايل */}
                     {!order.isDelivered && (
                       <button
                         onClick={() => deleteHandler(order._id)}

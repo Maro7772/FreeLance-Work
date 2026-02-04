@@ -51,7 +51,11 @@ const OrderPage = () => {
   };
 
   if (loading)
-    return <div className="text-center mt-20 font-cairo">جاري التحميل...</div>;
+    return (
+      <div className="text-center mt-20 font-cairo h-screen">
+        جاري التحميل...
+      </div>
+    );
   if (!order)
     return (
       <div className="text-center mt-20 text-red-500 font-cairo">
