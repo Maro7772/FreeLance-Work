@@ -30,3 +30,21 @@ export const createCategory = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// @desc    Delete a category
+// @route   DELETE /api/categories/:id
+// @access  Private/Admin
+export const deleteCategory = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+
+    if (category) {
+      await category.deleteOne();
+      res.json({ message: "تم حذف القسم بنجاح" });
+    } else {
+      res.status(404).json({ message: "القسم غير موجود" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

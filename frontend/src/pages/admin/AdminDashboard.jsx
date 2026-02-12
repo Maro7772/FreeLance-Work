@@ -8,7 +8,8 @@ import {
   FaBoxOpen,
   FaFolderPlus,
   FaLayerGroup,
-  FaImage
+  FaImage,
+  FaList
 } from "react-icons/fa";
 import axios from "../../apis/axios";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -80,6 +81,12 @@ const AdminDashboard = () => {
             className="flex-1 md:flex-none bg-white text-secondary border border-gray-200 px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-50 transition shadow-sm font-bold"
           >
             <FaFolderPlus className="text-primary" /> قسم جديد
+          </Link>
+          <Link
+            to="/admin/categories"
+            className="flex-1 md:flex-none bg-blue-50 text-blue-600 border border-blue-100 px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition shadow-sm font-bold"
+          >
+            <FaList /> عرض الأقسام
           </Link>
 
           <Link

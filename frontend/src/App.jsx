@@ -19,6 +19,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ProductCreatePage from "./pages/admin/ProductCreatePage";
 import CategoryCreatePage from "./pages/admin/CategoryCreatePage";
 import UserListPage from "./pages/admin/UserListPage";
+import CategoryList from "./pages/admin/CategoryList";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               path="/admin/product/create"
               element={<ProductCreatePage />}
             />
+            <Route path="/admin/categories" element={<CategoryList />} />
             <Route
               path="/admin/category/create"
               element={<CategoryCreatePage />}
