@@ -42,7 +42,7 @@ const CategoryList = () => {
       )
     ) {
       try {
-        await axios.delete(`/api/category/${id}`, {
+        await axios.delete(`/api/categories/${id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` }
         });
         toast.success("تم حذف القسم بنجاح");
