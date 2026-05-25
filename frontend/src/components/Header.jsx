@@ -8,7 +8,7 @@ import {
   FaTimes,
   FaBoxOpen,
   FaClipboardList,
-  FaUsers
+  FaUsers,
 } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import SearchBox from "./SearchBox";
@@ -36,7 +36,7 @@ const Header = () => {
           to="/"
           className="text-2xl font-bold text-primary hover:text-green-400 transition"
         >
-          متجر سعد
+          السعد للديكور
         </Link>
 
         <div className="hidden md:block flex-1 max-w-xl mx-auto px-8">
